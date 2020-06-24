@@ -4,13 +4,28 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="flash-message">
+
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            
+                  @if(Session::has('alert-' . $msg))
+            
+            
+            
+                  <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            
+                  @endif
+            
+                @endforeach
+            
+              </div> <!-- end .flash-message -->
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
+                        
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

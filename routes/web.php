@@ -20,7 +20,12 @@ Route::get('logout', 'Admin\Auth\LoginController@logout')->name('logout');
     });
 // });
 
+
 Auth::routes();
+Route::post('/login', [
+    'uses'          => 'Auth\LoginController@login',
+    'middleware'    => 'checkstatus',
+]);
 Route::group(['prefix'=>'users'], function(){
     Route::get('/','admin\UserController@view')->name('view');
     Route::match(['GET', 'POST'], 'add', 'Admin\UserController@create');
